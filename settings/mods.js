@@ -11,15 +11,9 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerDeath": function (mod) {
-                    this.ItemsHolder.setItem("vvv", true);
-                    this.ObjectMaker.getFunction("Player").prototype.title = "vvvvv";
-                    
-                    if (this.player) {
-                        this.player.title = "vvvv";
-                        this.PixelDrawer.setThingSprite(this.player);
-                        
-                        this.ThingHitter.cacheChecksForType(this.player.title, this.player.groupType);
-                    }
+            window.location.reload();
+
+        
                 }
             },
         }, {
