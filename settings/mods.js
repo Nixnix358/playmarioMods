@@ -133,7 +133,8 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerLanding": (function () {
-                    var shiftLevels = [190, 190, 190, 950, 0, -190, -609, -650, -302],
+                    var shiftLevels = [190, 190, 190, 190, 0, -190, -190, -190, -190
+                                    ],
                         shiftCount = 0,
                         shiftAll = function (FSM, texts, solids, scenery, characters) {
                             var dy = shiftLevels[shiftCount];
