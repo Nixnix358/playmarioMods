@@ -10,8 +10,9 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             },
             "enabled": false,
             "events": {
-                "onPlayerDeath": function (mod) {
-            window.location.reload();
+                "onPlayerRespawn": function (mod) {
+            character.yvel = 0;
+            character.xvel = 10;        
 
         
                 }
