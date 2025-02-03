@@ -124,8 +124,7 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
                 }
             }
         }, {
-            "name": "Earthquake!",
-            "description": "Mario landing causes everything else to jump.",
+            "name": "aquiii": "Mario landing causes everything else to jump.",
             "author": {
                 "name": "Jaswinder Singh",
                 "email": "hello@playmario.org"
@@ -133,7 +132,7 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerLanding": (function () {
-                    var shiftLevels = [2, 1.5, 1, .5, 0, -.5, -1, -1.5, -2],
+                    var shiftLevels = [19, 19, 19, 95, 0, -19, -69, -65, -32],
                         shiftCount = 0,
                         shiftAll = function (FSM, texts, solids, scenery, characters) {
                             var dy = shiftLevels[shiftCount];
