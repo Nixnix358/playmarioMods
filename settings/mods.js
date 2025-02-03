@@ -2,7 +2,7 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
     "storeLocally": true,
     "mods": [
         {
-            "name": "hardcore",
+            "name": "surpresa",
             "description": "gl",
             "author": {
                 "name": "Jaswinder Singh",
@@ -11,8 +11,15 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerDeath": function (mod) {
-            var yvel = 0;
-                
+                    this.ItemsHolder.setItem("vvv", true);
+                    this.ObjectMaker.getFunction("Player").prototype.title = "vvvvv";
+                    
+                    if (this.player) {
+                        this.player.title = "vvvv";
+                        this.PixelDrawer.setThingSprite(this.player);
+                        
+                        this.ThingHitter.cacheChecksForType(this.player.title, this.player.groupType);
+                    }
                 }
             },
         }, {
