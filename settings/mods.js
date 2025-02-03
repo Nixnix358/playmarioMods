@@ -15,10 +15,9 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
         for (i = 0; i < characters.length; i += 1) {
             character = characters[i];
             //:(
-                
+                character.xvel = player.FSM.unitsize * 10;        
+                character.yvel = player.FSM.unitsize * -100;         
         }
-        character.xvel = 10;        
-        character.yvel = 0;
                 }
             },
         }, {
