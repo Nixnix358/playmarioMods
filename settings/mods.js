@@ -11,13 +11,8 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerRespawn": function (mod) {
-                    
-        for (i = 0; i < characters.length; i += 1) {
-            character = characters[i];
-            //:(
-                character.xvel = player.FSM.unitsize * 10;        
-                character.yvel = player.FSM.unitsize * -100;         
-        }
+                     this.ObjectMaker.getFunction("Player").prototype.gravity 
+                            = this.ObjectMaker.getFunction("Area").prototype.gravity / 0
                 }
             },
         }, {
