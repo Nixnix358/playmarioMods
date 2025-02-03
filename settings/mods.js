@@ -11,10 +11,14 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             "enabled": false,
             "events": {
                 "onPlayerRespawn": function (mod) {
-            character.yvel = 0;
-            character.xvel = 10;        
-
-        
+                    
+        for (i = 0; i < characters.length; i += 1) {
+            character = characters[i];
+            //:(
+                
+        }
+        character.xvel = 10;        
+        character.yvel = 0;
                 }
             },
         }, {
