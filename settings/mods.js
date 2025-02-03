@@ -10,11 +10,72 @@ PlayMarioJas.PlayMarioJas.settings.mods = {
             },
             "enabled": false,
             "events": {
-                "onPlayerRespawn": function (mod) {
-                     this.ObjectMaker.getFunction("Player").prototype.gravity 
-                            = this.ObjectMaker.getFunction("Area").prototype.gravity / 0
+                "onPlayerLanding": function (mod) {
+                    var shiftLevels = [10, 9, 8, 8, 8, -8, -8, -8, -10],
+                    shiftCount = 0,
+                    shiftAll = function (FSM, texts, solids, scenery, characters) {
+                        var dy = shiftLevels[shiftCount];
+                        
+                        if (dy < 0) {
+                            FSM.shiftVert(FSM.player, dy);
+                        }
+                        
+                        FSM.shiftThings(texts, 0, dy);
+                        FSM.shiftThings(solids, 0, dy);
+                        FSM.shiftThings(scenery, 0, dy);
+                        FSM.shiftThings(characters, 0, dy);
+                        
+                        shiftCount += 1;
+                        if (shiftCount >= shiftLevels.length) {
+                            shiftCount = 0;
+                            return true;
+                        }
+                    };
+                
+                return function (mod) {
+                    var player = this.player,
+                        characters, solids, scenery, texts, character, i;
+                
+                    // Don't trigger during cutscenes or small landings
+                    if (
+                        player.FSM.MapScreener.nokeys
+                        || Math.abs(player.yvel) < player.FSM.unitsize / 4
+                    ) {
+                        return;
+                    }
+                    
+                    this.AudioPlayer.play("Bump");
+                    
+                    texts = this.GroupHolder.getTextGroup().slice();
+                    scenery = this.GroupHolder.getSceneryGroup().slice();
+                    solids = this.GroupHolder.getSolidGroup().slice();
+                    characters = this.GroupHolder.getCharacterGroup().slice();
+                    
+                    for (i = 0; i < characters.length; i += 1) {
+                        character = characters[i];
+                        if (
+                            character.player 
+                            || character.nofall 
+                            || !character.resting 
+                            || character.grounded
+                        ) {
+                            continue;
+                        }
+                        
+                        character.resting = undefined;
+                        character.yvel = player.FSM.unitsize * 9;
+                    }
+                    
+                    // A copy of each group is made because new Things 
+                    // added in shouldn't start being moved in the middle
+                    if (shiftCount === 0) {
+                        this.TimeHandler.addEventInterval(
+                            shiftAll, 1, Infinity, this,
+                            texts, solids, scenery, characters)
+                    }
                 }
-            },
+                }
+            }
         }, {
             "name": "Dark is the Night",
             "description": "The night is darkest before the dawn, but I promise you: the dawn is coming.",
